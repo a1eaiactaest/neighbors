@@ -11,11 +11,14 @@ turns = {
 n = 3
 arr = np.zeros(n)
 acc = [0]
+legal_possiblities = []
 
 def set_person(i):
   if i == n:
-    print(list(map(int, arr)))
-    acc[0] += 1
+    if arr[0] in turns[arr[-1]]:
+      acc[0] += 1
+      legal_possiblities.append(list(map(int, arr)))
+      return arr
     return
   for possible in turns[arr[i-1]]:
     arr[i] = possible
@@ -29,6 +32,7 @@ def main() -> None:
   arr[0] = 1
   set_person(1)
 
+  print(*legal_possiblities, sep='\n')
   print(acc[0])
 
 if __name__ == "__main__":
